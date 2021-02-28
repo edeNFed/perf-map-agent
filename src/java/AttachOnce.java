@@ -44,6 +44,7 @@ public class AttachOnce {
                 lib = new File("libperfmap.so");
             }
             String fullPath = lib.getAbsolutePath();
+            System.out.printf("Attaching %s\n", fullPath);
             if (!lib.exists()) {
                 System.out.printf("Expected %s at '%s' but it didn't exist.\n", lib.getName(), fullPath);
                 System.exit(1);
