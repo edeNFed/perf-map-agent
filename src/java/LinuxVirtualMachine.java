@@ -42,7 +42,7 @@ public class LinuxVirtualMachine extends HotSpotVirtualMachine {
     // location is the same for all processes, otherwise the tools
     // will not be able to find all Hotspot processes.
     // Any changes to this needs to be synchronized with HotSpot.
-    private static final String tmpdir = "attach";
+    private static final String tmpdir = "tmp";
 
     // Indicates if this machine uses the old LinuxThreads
     static boolean isLinuxThreads;
@@ -274,7 +274,7 @@ public class LinuxVirtualMachine extends HotSpotVirtualMachine {
 
     // Return the socket file for the given process.
     private String findSocketFile(int pid) {
-        File f = new File("/proc/" + pid + "/root/tmp", ".java_pid1");
+        File f = new File("/tmp", ".java_pid1");
         System.out.println("Now looking for the socket file at "+f.getAbsolutePath());
         if (!f.exists()) {
             return null;
@@ -288,7 +288,7 @@ public class LinuxVirtualMachine extends HotSpotVirtualMachine {
     // checks for the file.
     private File createAttachFile(int pid) throws IOException {
         String fn = ".attach_pid1";
-        String path = "/proc/" + pid + "/root/proc/1/cwd/" + fn;
+        String path = "/tmp/" + fn;
         File f = new File(path);
         try {
             f.createNewFile();
