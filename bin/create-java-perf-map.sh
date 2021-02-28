@@ -37,9 +37,9 @@ fi
 
 
 if [[ "$LINUX" == "1" ]]; then
-  sudo rm $PERF_MAP_FILE -f
-  (cd $PERF_MAP_DIR/out && sudo -u \#$TARGET_UID -g \#$TARGET_GID $JAVA_HOME/bin/java -cp $ATTACH_JAR_PATH:$JAVA_HOME/lib/tools.jar net.virtualvoid.perf.AttachOnce $PID "$OPTIONS")
-  sudo chown root:root $PERF_MAP_FILE
+  rm $PERF_MAP_FILE -f
+  (cd $PERF_MAP_DIR/out && $JAVA_HOME/bin/java -cp $ATTACH_JAR_PATH:$JAVA_HOME/lib/tools.jar net.virtualvoid.perf.AttachOnce $PID "$OPTIONS")
+  chown root:root $PERF_MAP_FILE
 else
   rm -f $PERF_MAP_FILE
   (cd $PERF_MAP_DIR/out && $JAVA_HOME/bin/java -cp $ATTACH_JAR_PATH:$JAVA_HOME/lib/tools.jar net.virtualvoid.perf.AttachOnce $PID "$OPTIONS")
